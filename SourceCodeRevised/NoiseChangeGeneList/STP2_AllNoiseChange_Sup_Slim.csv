@@ -1,0 +1,15 @@
+GOID	TERM	NUM_LIST_ANNOTATIONS	LIST_SIZE	CLUSTER_FREQUENCY	TOTAL_NUM_ANNOTATIONS	POPULATION_SIZE	GENOME_FREQUENCY	ANNOTATED_GENES
+GO:0006811	ion transport	4	13	30.77%	338	6444	5.25%	YBR296C, YEL065W, YOR382W, YOR383C
+GO:0071554	cell wall organization or biogenesis	3	13	23.08%	299	6444	4.64%	YGL028C, YKL164C, YLR286C
+GO:0005975	carbohydrate metabolic process	2	13	15.38%	253	6444	3.93%	YGL028C, YLR286C
+GO:0006869	lipid transport	2	13	15.38%	73	6444	1.13%	YJL078C, YJL079C
+GO:0055085	transmembrane transport	2	13	15.38%	467	6444	7.25%	YBR296C, YEL065W
+GO:0042221	response to chemical	1	13	7.69%	530	6444	8.22%	YLR109W
+GO:0006979	response to oxidative stress	1	13	7.69%	128	6444	1.99%	YLR109W
+GO:0007010	cytoskeleton organization	1	13	7.69%	280	6444	4.35%	YNL289W
+GO:0055086	nucleobase-containing small molecule metabolic process	1	13	7.69%	220	6444	3.41%	YOR074C
+GO:0031399	regulation of protein modification process	1	13	7.69%	178	6444	2.76%	YNL289W
+GO:0006468	protein phosphorylation	1	13	7.69%	232	6444	3.60%	YNL289W
+GO:0006520	cellular amino acid metabolic process	1	13	7.69%	218	6444	3.38%	YLR303W
+GO:0051726	regulation of cell cycle	1	13	7.69%	298	6444	4.62%	YNL289W
+GO:0006873	cellular ion homeostasis	1	13	7.69%	163	6444	2.53%	YEL065W

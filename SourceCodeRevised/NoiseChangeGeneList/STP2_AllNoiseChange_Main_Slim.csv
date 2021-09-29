@@ -1,0 +1,26 @@
+GOID	TERM	NUM_LIST_ANNOTATIONS	LIST_SIZE	CLUSTER_FREQUENCY	TOTAL_NUM_ANNOTATIONS	POPULATION_SIZE	GENOME_FREQUENCY	ANNOTATED_GENES
+GO:0006811	ion transport	5	15	33.33%	338	6444	5.25%	YEL065W, YGR055W, YHR092C, YOR382W, YOR383C
+GO:0055085	transmembrane transport	3	15	20.00%	467	6444	7.25%	YEL065W, YGR055W, YHR092C
+GO:0071554	cell wall organization or biogenesis	2	15	13.33%	299	6444	4.64%	YMR215W, YNL160W
+GO:0005975	carbohydrate metabolic process	2	15	13.33%	253	6444	3.93%	YLR258W, YMR215W
+GO:0006865	amino acid transport	1	15	6.67%	56	6444	0.87%	YGR055W
+GO:0007005	mitochondrion organization	1	15	6.67%	287	6444	4.45%	YEL020W-A
+GO:0006091	generation of precursor metabolites and energy	1	15	6.67%	111	6444	1.72%	YLR258W
+GO:0000278	mitotic cell cycle	1	15	6.67%	377	6444	5.85%	YPL256C
+GO:0006457	protein folding	1	15	6.67%	121	6444	1.88%	YPL241C
+GO:0006468	protein phosphorylation	1	15	6.67%	232	6444	3.60%	YPL256C
+GO:0006873	cellular ion homeostasis	1	15	6.67%	163	6444	2.53%	YEL065W
+GO:0042274	ribosomal small subunit biogenesis	1	15	6.67%	146	6444	2.27%	YML024W
+GO:0008643	carbohydrate transport	1	15	6.67%	46	6444	0.71%	YHR092C
+GO:0042221	response to chemical	1	15	6.67%	530	6444	8.22%	YPL256C
+GO:0000902	cell morphogenesis	1	15	6.67%	46	6444	0.71%	YPL241C
+GO:0006364	rRNA processing	1	15	6.67%	366	6444	5.68%	YER002W
+GO:0051726	regulation of cell cycle	1	15	6.67%	298	6444	4.62%	YPL256C
+GO:0042273	ribosomal large subunit biogenesis	1	15	6.67%	130	6444	2.02%	YER002W
+GO:0042255	ribosome assembly	1	15	6.67%	80	6444	1.24%	YML024W
+GO:0006520	cellular amino acid metabolic process	1	15	6.67%	218	6444	3.38%	YOL058W
+GO:0055086	nucleobase-containing small molecule metabolic process	1	15	6.67%	220	6444	3.41%	YOR074C
+GO:0006605	protein targeting	1	15	6.67%	256	6444	3.97%	YEL020W-A
+GO:0031399	regulation of protein modification process	1	15	6.67%	178	6444	2.76%	YPL256C
+GO:0000746	conjugation	1	15	6.67%	119	6444	1.85%	YPL256C
+GO:0002181	cytoplasmic translation	1	15	6.67%	205	6444	3.18%	YML024W

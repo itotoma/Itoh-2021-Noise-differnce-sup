@@ -1,0 +1,25 @@
+GOID	TERM	NUM_LIST_ANNOTATIONS	LIST_SIZE	CLUSTER_FREQUENCY	TOTAL_NUM_ANNOTATIONS	POPULATION_SIZE	GENOME_FREQUENCY	ANNOTATED_GENES
+GO:0006811	ion transport	4	13	30.77%	338	6444	5.25%	YDR345C, YGL255W, YLR214W, YOR382W
+GO:0033043	regulation of organelle organization	2	13	15.38%	283	6444	4.39%	YPL158C, YPL240C
+GO:0071554	cell wall organization or biogenesis	2	13	15.38%	299	6444	4.64%	YHR143W, YJL159W
+GO:0007005	mitochondrion organization	2	13	15.38%	287	6444	4.45%	YLR190W, YPL240C
+GO:0055085	transmembrane transport	2	13	15.38%	467	6444	7.25%	YDR345C, YGL255W
+GO:0000278	mitotic cell cycle	2	13	15.38%	377	6444	5.85%	YKL185W, YPL158C
+GO:0051726	regulation of cell cycle	2	13	15.38%	298	6444	4.62%	YKL185W, YPL158C
+GO:0007124	pseudohyphal growth	2	13	15.38%	75	6444	1.16%	YHR143W, YKL185W
+GO:0000910	cytokinesis	1	13	7.69%	105	6444	1.63%	YPL158C
+GO:0048308	organelle inheritance	1	13	7.69%	56	6444	0.87%	YLR190W
+GO:0006605	protein targeting	1	13	7.69%	256	6444	3.97%	YPL240C
+GO:0006457	protein folding	1	13	7.69%	121	6444	1.88%	YPL240C
+GO:0006091	generation of precursor metabolites and energy	1	13	7.69%	111	6444	1.72%	YER067W
+GO:0008643	carbohydrate transport	1	13	7.69%	46	6444	0.71%	YDR345C
+GO:0006325	chromatin organization	1	13	7.69%	307	6444	4.76%	YKL185W
+GO:0006366	transcription by RNA polymerase II	1	13	7.69%	557	6444	8.64%	YKL185W
+GO:0051052	regulation of DNA metabolic process	1	13	7.69%	99	6444	1.54%	YPL240C
+GO:0006873	cellular ion homeostasis	1	13	7.69%	163	6444	2.53%	YLR214W
+GO:0006970	response to osmotic stress	1	13	7.69%	73	6444	1.13%	YPL240C
+GO:0051604	protein maturation	1	13	7.69%	96	6444	1.49%	YPL240C
+GO:0009408	response to heat	1	13	7.69%	67	6444	1.04%	YPL240C
+GO:0032200	telomere organization	1	13	7.69%	95	6444	1.47%	YPL240C
+GO:0007010	cytoskeleton organization	1	13	7.69%	280	6444	4.35%	YPL158C
+GO:0006520	cellular amino acid metabolic process	1	13	7.69%	218	6444	3.38%	YER091C

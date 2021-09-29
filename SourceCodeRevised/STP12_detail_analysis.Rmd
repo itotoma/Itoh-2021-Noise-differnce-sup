@@ -1,0 +1,156 @@
+---
+title: "STP12_detail_analysis"
+author: "Thoma Itoh"
+date: "6/16/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+Verify whether required data exists
+```{r}
+if(!exists("strain.list")){
+  cat("Please execute Main.R [Warning: 1]")
+}else if(!exists("Genetic.interaction")){
+  cat("Please execute Main.R [Warning: 2]")
+}else if(!exists("NoiseOnlyDiffList")){
+  cat("Please execute DifferenceTestAll.R [Warning: 3]")
+}else if(!exists("NoiseDiffList")){
+  cat("Please execute DifferenceTestAll.R [Warning: 4]")
+}else if(!exists("MeanDiffList")){
+  cat("Please execute DifferenceTestAll.R [Warning: 5]")
+}else{cat("All data collect")}
+```
+
+
+## Extract common noise-only change gene 
+Result 
+  Based on our concepts, the candidate of redundant regulated genes,
+  which detected by noise change without mean change (noise-only change),
+  must be common to the deletion strain of redundant gene pair. 
+
+```{r}
+Common.Interaction <-lapply(strain.list, Extract.common.interacton, Genetic.interaction, strain.list) %>% set_names(strain.list)
+Noise.only.change <- lapply(NoiseOnlyDiffList, Assign.known.interaction, Common.Interaction) %>% lapply(function(DF){DF %>% filter(starnum == 1)})
+Mean.change <- lapply(MeanDiffList, Assign.known.interaction, Common.Interaction) %>% lapply(function(DF){DF %>% filter(starnum == 1)})
+STP12.common.noiseonlychange <- intersect(Noise.only.change[["STP1"]]$GeneName, Noise.only.change[["STP2"]]$GeneName)
+STP12.common.meanchange <- intersect(Mean.change[["STP1"]]$V2, Mean.change[["STP2"]]$V2)
+STP12.common.noisechange.with.known.common.int <- Genetic.interaction %>% filter(V1 == "STP2") %>% filter(is.element(V2, STP12.common.noisechange)) %>% nth(2)
+
+print("Common noise-only change gene in STP1 and STP2")
+print(CommonName(STP12.common.noiseonlychange))
+print("Common noise-only change gene knwon as downstream of STP1 and STP2 ")
+print(CommonName(STP12.common.noisechange.with.known.common.int))
+print("Common mean change gene in STP1 and STP2")
+print(CommonName(STP12.common.meanchange))
+```
+
+
+#The proportion of common noise-only change in the whole noise-only
+#Result
+  #Not all noise-only change genes are common to the ΔSTP1 and ΔSTP2.
+  #The total number of noise-only change genes in the ΔSTP1 is 15, 
+  #and that of ΔSTP2 is 8. As described above. Most noise-only 
+  #change genes are detected only in ΔSTP1 or ΔSTP2. 
+  
+```{r}
+Noise.only.whole <- c(Noise.only.change[["STP1"]]$GeneName, Noise.only.change[["STP2"]]$GeneName) %>% unique()
+print("Number.of.noiseonly.STP1")
+Number.of.noiseonly.STP1 <- length(Noise.only.change[["STP1"]]$GeneName) %>% print()
+print("Number.of.noiseonly.STP2")
+Number.of.noiseonly.STP2 <- length(Noise.only.change[["STP2"]]$GeneName) %>% print()
+print("Proportion.of.common.noiseonly")
+Proportion.of.common.noiseonly <- (length(STP12.common.noisechange)/length(Noise.only.whole)) %>% print()
+```
+
+## GO enrichment analysis
+```{r}
+STP1.known.int <- Genetic.interaction %>% filter(V1 == "STP1") %>% select(V2)
+STP2.known.int <- Genetic.interaction %>% filter(V1 == "STP2") %>% select(V2)
+STP.known.int.all <- c(list(STP1.known.int), list(STP2.known.int)) %>% set_names(c("STP1","STP2"))
+STP1.GOSlimMap <- read.csv("NoiseChangeGeneList/STP1_AllNoiseChange_Main_Slim.csv", sep="\t")
+STP2.GOSlimMap <- read.csv("NoiseChangeGeneList/STP2_AllNoiseChange_Main_Slim.csv", sep="\t")
+STP1.GOSlimMap.cluster <- read.csv("NoiseChangeGeneList/STP1_AllNoiseChange_Sup_Slim.csv", sep="\t")
+STP2.GOSlimMap.cluster <- read.csv("NoiseChangeGeneList/STP2_AllNoiseChange_Sup_Slim.csv", sep="\t")
+head(STP1.GOSlimMap)
+```
+
+
+Crate table 1
+```{r}
+#Table 1
+STP1.GOSlimMap.TidyDF <- Create.GO.DF(STP1.GOSlimMap) %>% mutate(Group = "STP1") %>% select(Gene, `GO Term`, Group) %>% 
+  set_names(c("GeneName", "GO term", "Group")) %>% Assign.known.interaction(STP.known.int.all) %>% arrange(TFTarget) %>% 
+  mutate(TFTarget = ifelse(TFTarget == "T", "Known", "Novel")) %>% 
+  left_join(Yeast.gene.name, by=c("GeneName"="SGD")) %>% select(Name, TFTarget, `GO term`, Group) %>% set_names(c("Name", "Interaction", "GO term", "Group"))
+
+STP2.GOSlimMap.TidyDF <- Create.GO.DF(STP2.GOSlimMap) %>% mutate(Group = "STP2") %>% select(Gene, `GO Term`, Group) %>% 
+  set_names(c("GeneName", "GO term", "Group")) %>% Assign.known.interaction(STP.known.int.all) %>% arrange(TFTarget) %>% 
+  mutate(TFTarget = ifelse(TFTarget == "T", "Known", "Novel")) %>% 
+  left_join(Yeast.gene.name, by=c("GeneName"="SGD")) %>% select(Name, TFTarget, `GO term`, Group) %>% set_names(c("Name", "Interaction", "GO term", "Group"))
+
+STP.GOSlimMap.TidyDF <- rbind(STP1.GOSlimMap.TidyDF, STP2.GOSlimMap.TidyDF) %>% Create.GO.tidyTable()
+STP.GOSlimMap.TidyDF
+#gtsave(STP.GOSlimMap.TidyDF, "MainTable1_STP_AllNoise.pdf")
+#gtsave(STP.GOSlimMap.TidyDF, "MainTable1_STP_AllNoise.html")
+```
+
+
+Create venn diagram in the Figure 3
+```{r}
+library(VennDiagram) 
+STP1_verify <- read.csv("./YeastractSTP1_VerifyMethod.csv")
+STP2_verify <- read.csv("./YeastractSTP2_VerifyMethod.csv")
+STP1_double = STP1_verify %>% filter(grepl(pattern = 'Double',x = CompareType))
+STP2_double = STP2_verify %>% filter(grepl(pattern = 'Double',x = CompareType))
+Downstream.double = rbind(STP1_double, STP2_double) %>% filter(!duplicated(Gene))
+STP1_Single = STP1_verify %>% filter(grepl(pattern = 'Single',x = CompareType))
+STP2_Single = STP2_verify %>% filter(grepl(pattern = 'Single',x = CompareType)) 
+list_SingleDouble <- list(ΔSTP1 = STP1_Single$Gene, ΔSTP2 = STP2_Single$Gene, ΔSTP1ΔSTP2 = Downstream.double$Gene)
+venn.diagram(list_SingleDouble, filename="testVennFig3.jpg", fill=c(2,4,3), cat.col=c(2,4,3), alpha=0.4, lty=1, scale=T)
+```
+
+
+Create table S1
+```{r}
+Sup.table1 <-
+  data.frame(
+    Strain = c("ΔSTP1", "ΔSTP2", "ΔDAL80", "ΔGLN3", "ΔGAT1", "ΔGZF3", "ΔRTG1", "ΔRTG3"),
+    Paralog = c("STP2", "STP1", "GLN3, GAT1, GZF3", "DAL80, GAT1, GZF3", "DAL80, GLN3, GZF3", "DAL80, GLN3, GAT1", "Nothing", "Nothing")
+  ) %>% gt() %>% 
+  tab_options(
+    # table.width = pct(80)
+  )
+Sup.table1
+gtsave(Sup.table1, "SupTable1.pdf")
+```
+
+Create table S2
+```{r}
+STP1.GOSlimMap.cluster.TidyDF <- Create.GO.DF(STP1.GOSlimMap.cluster) %>% mutate(Group = "STP1") %>% select(Gene, `GO Term`, Group) %>% 
+  set_names(c("GeneName", "GO term", "Group")) %>% Assign.known.interaction(STP.known.int.all) %>% arrange(TFTarget) %>% 
+  mutate(TFTarget = ifelse(TFTarget == "T", "Known", "Novel")) %>% 
+  left_join(Yeast.gene.name, by=c("GeneName"="ORF")) %>% select(Name, TFTarget, `GO term`, Group) %>% set_names(c("Name", "Interaction", "GO term", "Group"))
+
+STP2.GOSlimMap.cluster.TidyDF <- Create.GO.DF(STP2.GOSlimMap.cluster) %>% mutate(Group = "STP2") %>% select(Gene, `GO Term`, Group) %>% 
+  set_names(c("GeneName", "GO term", "Group")) %>% Assign.known.interaction(STP.known.int.all) %>% arrange(TFTarget) %>% 
+  mutate(TFTarget = ifelse(TFTarget == "T", "Known", "Novel")) %>% 
+  left_join(Yeast.gene.name, by=c("GeneName"="ORF")) %>% select(Name, TFTarget, `GO term`, Group) %>% set_names(c("Name", "Interaction", "GO term", "Group"))
+
+STP.GOSlimMap.cluster.TidyDF <- rbind(STP1.GOSlimMap.cluster.TidyDF, STP2.GOSlimMap.cluster.TidyDF) %>% Create.GO.tidyTable()
+print(STP.GOSlimMap.cluster.TidyDF)
+#gtsave(STP.GOSlimMap.TidyDF, "SupTable1_STP_AllNoise.html")
+```
+
+
+
+
+$"YDL038C" "YPL265W" "YBR068C" "TLC1" 

@@ -1,0 +1,19 @@
+GOID	TERM	NUM_LIST_ANNOTATIONS	LIST_SIZE	CLUSTER_FREQUENCY	TOTAL_NUM_ANNOTATIONS	POPULATION_SIZE	GENOME_FREQUENCY	ANNOTATED_GENES
+GO:0071554	cell wall organization or biogenesis	2	10	20.00%	299	6444	4.64%	YMR215W, YNL283C
+GO:0006520	cellular amino acid metabolic process	2	10	20.00%	218	6444	3.38%	YER091C, YLR355C
+GO:0005975	carbohydrate metabolic process	1	10	10.00%	253	6444	3.93%	YMR215W
+GO:0006974	cellular response to DNA damage stimulus	1	10	10.00%	226	6444	3.51%	YLR183C
+GO:0006766	vitamin metabolic process	1	10	10.00%	57	6444	0.88%	YGR286C
+GO:0002181	cytoplasmic translation	1	10	10.00%	205	6444	3.18%	YLR344W
+GO:0006811	ion transport	1	10	10.00%	338	6444	5.25%	YGR055W
+GO:0007005	mitochondrion organization	1	10	10.00%	287	6444	4.45%	YLR355C
+GO:0006865	amino acid transport	1	10	10.00%	56	6444	0.87%	YGR055W
+GO:0055085	transmembrane transport	1	10	10.00%	467	6444	7.25%	YGR055W
+GO:0006468	protein phosphorylation	1	10	10.00%	232	6444	3.60%	YMR199W
+GO:0000278	mitotic cell cycle	1	10	10.00%	377	6444	5.85%	YMR199W
+GO:0055086	nucleobase-containing small molecule metabolic process	1	10	10.00%	220	6444	3.41%	YOR074C
+GO:0031399	regulation of protein modification process	1	10	10.00%	178	6444	2.76%	YMR199W
+GO:0009408	response to heat	1	10	10.00%	67	6444	1.04%	YNL283C
+GO:0032787	monocarboxylic acid metabolic process	1	10	10.00%	164	6444	2.55%	YGR286C
+GO:0042273	ribosomal large subunit biogenesis	1	10	10.00%	130	6444	2.02%	YLR344W
+GO:0051726	regulation of cell cycle	1	10	10.00%	298	6444	4.62%	YMR199W
